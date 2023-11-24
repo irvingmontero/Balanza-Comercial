@@ -1,1 +1,5 @@
-
+data = readtable('datos_maiz.csv');
+data.Periodo = datetime(data.Periodo, 'InputFormat' , 'yyyy/MM' );
+figure;
+plot(data.Periodo, data.Exportaciones, 'b-' , 'LineWidth' , 2);
+hold on;
