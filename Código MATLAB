@@ -3,3 +3,21 @@ data.Periodo = datetime(data.Periodo, 'InputFormat' , 'yyyy/MM' );
 figure;
 plot(data.Periodo, data.Exportaciones, 'b-' , 'LineWidth' , 2);
 hold on;
+title('Exportaciones e Importaciones de Maíz en México, 1993-2023');
+xlabel('Período');
+ylabel('Miles de Dolares');
+legend('Exportaciones','Importaciones);
+grid on;
+yticks(0:1000000:1000000);
+ytickslabels({'0','100,000','200,000','300,000','400,000','500,000','600,000','700,000','800,000','900,000','1,000,000'});
+
+data = readtable('datos_maiz.csv');
+data.Periodo = datetime(data.Periodo, 'InputFormat','yyyy/MM');
+data = sortrows(data, 'Periodo');
+window_size = 12;
+data.Exportaciones_MovMean = movmean(data.Exportaciones, window_size, 'Endpoints', 'fill');
+data.Importaciones_MovMean = movmean(data.Importaciones, window_size, 'Endpoints', 'fill');
+
+figure;
+plot(data.Periodo, data.Exportaciones, 'b-', 'LineWidth', 2);
+hold on;
